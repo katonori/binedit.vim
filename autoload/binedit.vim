@@ -43,11 +43,12 @@ function! binedit#BeginEdit()
     let l:fileName = expand("%:p")
     let l:tmpFileName = tempname()
     " setup the buffer content
-    exec "e " . l:tmpFileName
+    exec "w! " . l:tmpFileName
+    exec "e! " . l:tmpFileName
+    setlocal fenc=""
     setlocal filetype=xxd
     setlocal binary
     setlocal noeol
-    exec "0read " . l:fileName
     call s:BinarizeBuf()
     exec "w"
     " keep original filename
